@@ -3,7 +3,7 @@ require("dotenv").config();
 const { NGROK_URL, PORT } = process.env;
 
 if (!NGROK_URL) {
-  return console.error("Missing environment variabes.");
+  return console.error("Missing environment variables.");
 }
 
 const express = require("express");
@@ -55,31 +55,27 @@ async function main() {
   });
 
   app.post(`/print/image`, async (request, response) => {
-    console.log("body", request.body);
+    response.json({ success: true });
 
-    const { base64ImageString, printRotation } = request.body;
+    const { base64ImageString, isFlipped } = request.body;
 
     if (base64ImageString) {
       const ditheredImagePath = await ditherImage({
         base64ImageString,
-        printRotation,
+        isFlipped,
       });
       await printer.printImage({ imagePath: ditheredImagePath });
     }
-
-    response.json({ success: true });
   });
 
   app.post(`/print/text`, async (request, response) => {
-    console.log("body", request.body);
+    response.json({ success: true });
 
-    const { text } = request.body;
+    const { text, isFlipped, isBig } = request.body;
 
     if (text) {
-      await printer.printText({ text });
+      await printer.printText({ text, isFlipped, isBig });
     }
-
-    response.json({ success: true });
   });
 }
 main();

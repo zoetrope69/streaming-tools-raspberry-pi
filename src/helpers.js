@@ -9,7 +9,7 @@ function base64StrippedStringAndContentType(base64String) {
   }
 
   const string = base64String.replace(
-    `data:image/${contentType};base64`,
+    `data:image/${contentType};base64,`,
     "",
   ); // strip image type prefix
 
