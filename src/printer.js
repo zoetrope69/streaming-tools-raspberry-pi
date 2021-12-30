@@ -24,11 +24,9 @@ class Printer {
         }  Pending: ${this.queue.pending}`,
       );
     });
-
-    this.initialisePrinter();
   }
 
-  async initialisePrinter() {
+  async initialise() {
     return new Promise((resolve) => {
       serialPort.on("open", () => {
         console.log("Serial port open!");
