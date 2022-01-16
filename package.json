@@ -3,7 +3,7 @@
   "name": "streaming-tools-raspberry-pi",
   "version": "1.0.0",
   "dependencies": {
-    "dotenv": "11.0.0",
+    "dotenv": "12.0.4",
     "express": "4.17.2",
     "gm": "1.23.1",
     "lastfm": "0.9.3",
