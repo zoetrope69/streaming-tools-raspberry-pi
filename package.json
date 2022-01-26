@@ -8,7 +8,7 @@
     "gm": "1.23.1",
     "lastfm": "0.9.3",
     "node-fetch": "3.2.0",
-    "p-queue": "6.6.2",
+    "p-queue": "7.1.0",
     "serialport": "9.2.8",
     "thermalprinter": "0.3.10",
     "uuid": "8.3.2"
