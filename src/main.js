@@ -62,24 +62,28 @@ async function main() {
   app.post(`/print/image`, async (request, response) => {
     response.json({ success: true });
 
-    const { base64ImageString, isFlipped } = request.body;
+    const { base64ImageString, isFlipped, ...options } = request.body;
 
     if (base64ImageString) {
       const ditheredImagePath = await ditherImage({
         base64ImageString,
         isFlipped,
       });
-      await printer.printImage({ imagePath: ditheredImagePath });
+      await printer.printImage({
+        imagePath: ditheredImagePath,
+        ...options,
+      });
     }
   });
 
   app.post(`/print/text`, async (request, response) => {
     response.json({ success: true });
 
-    const { text, isFlipped, isBig } = request.body;
+    const { text, ...options } = request.body;
 
     if (text) {
-      await printer.printText({ text, isFlipped, isBig });
+      console.log(`Printing "${text}"...`);
+      await printer.printText({ text, ...options });
     }
   });
 }

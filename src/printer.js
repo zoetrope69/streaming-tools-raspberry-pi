@@ -4,6 +4,8 @@ if (!PRINTER_USB || !PRINTER_BAUDRATE) {
   return console.error("Missing environment variabes.");
 }
 
+const PRINT_CHARACTER_PER_MILLISECOND = 12;
+
 const { default: PQueue } = require("p-queue");
 const SerialPort = require("serialport");
 const serialPort = new SerialPort(PRINTER_USB, {
@@ -60,46 +62,69 @@ class Printer {
     });
   }
 
-  async queuePrintItem(printItem) {
+  async queuePrintItem({ printItem, estimatedTimeout }) {
     return this.queue.add(() => {
       return new Promise((resolve) => {
         console.log("Printing...");
         printItem.print(() => {
-          console.log("Printed");
-
           /* 
-            just a lil delay cause im
-            scared it'll break
+            printer doesn't tell us when it's finished printing
+            just when we've finished sending serial info to it
+
+            ive manually recorded how long different text takes
+            to print and just gonna use that to estimate how long
+            to take...
           */
-          setTimeout(resolve, 100);
+          setTimeout(() => {
+            console.log("Printed");
+            resolve();
+          }, estimatedTimeout || 2 * 1000); // 2 second default
         });
       });
     });
   }
 
-  async printText({ text, isFlipped = false, isBig = false }) {
+  async printText({
+    text,
+    isFlipped = false,
+    isBig = false,
+    lineFeed = { before: 0, after: 0 },
+  }) {
     if (!this.printer) {
       throw new Error("No printer initialised");
     }
 
-    return this.queuePrintItem(
-      this.printer
-        .big(isBig)
-        .upsideDown(isFlipped)
-        .printText(text)
-        .lineFeed(3)
-        .big(false), // disable big mode
-    );
+    const printItem = this.printer
+      .lineFeed(lineFeed.before)
+      .big(isBig)
+      .upsideDown(isFlipped)
+      .printText(text)
+      .lineFeed(lineFeed.after)
+      .big(false);
+
+    return this.queuePrintItem({
+      printItem,
+      estimatedTimeout: text.length * PRINT_CHARACTER_PER_MILLISECOND,
+    });
   }
 
-  async printImage({ imagePath }) {
+  async printImage({
+    imagePath,
+    lineFeed = { before: 0, after: 0 },
+  }) {
     if (!this.printer) {
       throw new Error("No printer initialised");
     }
 
-    return this.queuePrintItem(
-      this.printer.printImage(imagePath).lineFeed(2),
-    );
+    const printItem = this.printer
+      .lineFeed(lineFeed.before)
+      .printImage(imagePath)
+      .lineFeed(lineFeed.after);
+
+    return this.queuePrintItem({
+      printItem,
+      estimatedTimeout: 30 * 1000, // 30 seconds
+    });
   }
 }
 
