@@ -7,7 +7,7 @@
     "express": "4.17.3",
     "gm": "1.23.1",
     "lastfm": "0.9.3",
-    "node-fetch": "3.2.0",
+    "node-fetch": "3.2.1",
     "p-queue": "6.6.2",
     "serialport": "9.2.8",
     "thermalprinter": "0.3.10",
