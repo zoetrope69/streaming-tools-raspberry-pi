@@ -50,7 +50,8 @@ async function main() {
 
   // print out ip address
   const ipAddress = getIpAddress();
-  await printer.printText({ text: `IP: ${ipAddress}`, isBig: true });
+  console.log("IP Address: ", ipAddress);
+  // await printer.printText({ text: `IP: ${ipAddress}`, isBig: true });
 
   pingMainServer();
   setInterval(pingMainServer, 10000); // then ping every 10 secs
