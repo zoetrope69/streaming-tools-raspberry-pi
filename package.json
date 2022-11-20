@@ -9,7 +9,7 @@
     "fast-average-color-node": "^2.4.0",
     "get-image-colors": "^4.0.1",
     "gm": "1.23.1",
-    "image-type": "^4.1.0",
+    "image-type": "^5.0.0",
     "jimp": "0.16.1",
     "lastfm": "0.9.3",
     "memory-cache": "^0.2.0",
