@@ -16,7 +16,7 @@
     "node-fetch": "3.2.3",
     "p-queue": "6.6.2",
     "pixoo": "0.0.1",
-    "serialport": "9.2.8",
+    "serialport": "10.5.0",
     "sharp": "^0.30.7",
     "thermalprinter": "0.3.10",
     "uuid": "8.3.2"
