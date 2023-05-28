@@ -11,7 +11,7 @@
     "gm": "1.23.1",
     "image-type": "^4.1.0",
     "jimp": "0.16.1",
-    "lastfm": "0.9.3",
+    "lastfm": "0.9.4",
     "memory-cache": "^0.2.0",
     "node-fetch": "3.2.3",
     "p-queue": "6.6.2",
