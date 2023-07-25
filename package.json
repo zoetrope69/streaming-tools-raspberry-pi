@@ -13,7 +13,7 @@
     "jimp": "0.16.1",
     "lastfm": "0.9.3",
     "memory-cache": "^0.2.0",
-    "node-fetch": "3.2.3",
+    "node-fetch": "3.3.2",
     "p-queue": "6.6.2",
     "pixoo": "0.0.1",
     "serialport": "9.2.8",
