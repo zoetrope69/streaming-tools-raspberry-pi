@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "dependencies": {
     "chroma-js": "^2.4.2",
-    "dotenv": "16.0.0",
+    "dotenv": "16.6.1",
     "express": "4.17.3",
     "fast-average-color-node": "^2.4.0",
     "get-image-colors": "^4.0.1",
